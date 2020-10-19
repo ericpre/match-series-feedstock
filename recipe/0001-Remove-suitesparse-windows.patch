@@ -1,0 +1,50 @@
+diff --git a/quocmesh/CMakeLists.txt b/quocmesh/CMakeLists.txt
+index b731ce2..a62468a 100644
+--- a/quocmesh/CMakeLists.txt
++++ b/quocmesh/CMakeLists.txt
+@@ -1001,34 +1001,19 @@ ENDIF ( )
+ #! \cmakeoption{Use SuiteSparse,ON}
+ OPTION ( USE_SUITESPARSE "" OFF )
+ IF ( USE_SUITESPARSE AND BLAS_FOUND AND LAPACK_FOUND )
+-  IF ( NOT WIN32 )
+-    FIND_PACKAGE ( SUITESPARSE )
+-    IF ( SUITESPARSE_FOUND OR SuiteSparse_FOUND )
+-      IF ( SUITESPARSE_FOUND )
+-        INCLUDE_DIRECTORIES ( ${SUITESPARSE_INCLUDE_DIRS} )
+-        LINK_DIRECTORIES ( ${SUITESPARSE_LIBRARY_DIR} )
+-        SET ( SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${SUITESPARSE_LIBRARIES} ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES} )
+-      ELSE ( )
+-        INCLUDE_DIRECTORIES ( ${SuiteSparse_INCLUDE_DIRS} )
+-        SET ( SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${SuiteSparse_LIBRARIES} )
+-      ENDIF ( )
+-      ADD_COMPILE_DEFINITIONS ( USE_EXTERNAL_SUITESPARSE )
++  FIND_PACKAGE ( SUITESPARSE )
++  IF ( SUITESPARSE_FOUND OR SuiteSparse_FOUND )
++    IF ( SUITESPARSE_FOUND )
++      INCLUDE_DIRECTORIES ( ${SUITESPARSE_INCLUDE_DIRS} )
++      LINK_DIRECTORIES ( ${SUITESPARSE_LIBRARY_DIR} )
++      SET ( SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${SUITESPARSE_LIBRARIES} ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES} )
+     ELSE ( )
+-      MESSAGE ( FATAL_ERROR "Could NOT find SUITESPARSE" )
++      INCLUDE_DIRECTORIES ( ${SuiteSparse_INCLUDE_DIRS} )
++      SET ( SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${SuiteSparse_LIBRARIES} )
+     ENDIF ( )
++    ADD_COMPILE_DEFINITIONS ( USE_EXTERNAL_SUITESPARSE )
+   ELSE ( )
+-    # This block links SuiteSparse on Windows
+-    # Download from: https://github.com/jlblancoc/suitesparse-metis-for-windows
+-    # Build with MinGW or MSVC and set SuiteSparse_DIR to the install directory
+-    SET ( SuiteSparse_USE_LAPACK_BLAS ON )
+-    FIND_PACKAGE ( SuiteSparse NO_MODULE )
+-    IF ( SuiteSparse_FOUND )
+-      INCLUDE ( ${USE_SuiteSparse} )
+-	  SET ( SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${SuiteSparse_LIBRARIES} ) # blas and lapack should be included with SuiteSparseWindows
+-	ADD_COMPILE_DEFINITIONS ( USE_EXTERNAL_SUITESPARSE )
+-      ELSE ( )
+-        MESSAGE ( STATUS "Could NOT find SUITESPARSE (hint: did you forget to specify SuiteSparse_DIR?)")
+-      ENDIF ( )
++    MESSAGE ( FATAL_ERROR "Could NOT find SUITESPARSE" )
+   ENDIF ( )
+ ELSE ( )
+   IF ( USE_SUITESPARSE AND ( NOT BLAS_FOUND ) )
+
