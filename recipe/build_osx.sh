@@ -8,9 +8,9 @@ cmake -G"Unix Makefiles" \
       -DUSE_PNG=1 \
       -DPARSE_GCC_ERRORS=0 \
       -DUSE_OPENMP=0 \
-      -DDYNAMIC_LINKING=1 \
+      -DDYNAMIC_LINKING=0 \
       -DUSE_PROFILING=0 \
-      -DUSE_SSE=1 \
+      -DUSE_SSE=0 \
       -DUSE_BLAS=0 \
       -DUSE_LAPACK=0 \
       -DUSE_DOXYGEN=0 \

@@ -21,8 +21,8 @@ requirements:
     - cmake
     - make  # [unix]
   host:
-    - libblas  # [linux]
-    - liblapack  # [linux]
+    - libblas  # [not osx]
+    - liblapack  # [not osx]
     - fftw
     - libpng
     - zlib
