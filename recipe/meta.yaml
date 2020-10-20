@@ -11,21 +11,24 @@ source:
 
 build:
   number: 1
-
+  script: bash build_osx.sh  # [osx]
+  script: bash build_linux.sh  # [linux]
+  script: bld.bat  # [win]
+ 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
     - make  # [unix]
   host:
-    - libblas
-    - liblapack
+    - libblas  # [linux]
+    - liblapack  # [linux]
     - fftw
     - libpng
     - zlib
     - bzip2  # [unix]
     - libtiff
-    - suitesparse  # [unix]
+    - suitesparse  # [linux]
   run:
 
 test:
