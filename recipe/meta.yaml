@@ -10,23 +10,22 @@ source:
   sha256: fe4b203127c6b3c7892815f37d7e134830d6b97312e8b481cca3e5cfc834e0c4
 
 build:
-  number: 0
-  skip: true  # [osx]
+  number: 1
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - make  # [linux]
+    - make  # [unix]
   host:
     - libblas
     - liblapack
     - fftw
     - libpng
     - zlib
-    - bzip2  # [linux]
+    - bzip2  # [unix]
     - libtiff
-    - suitesparse  # [linux]
+    - suitesparse  # [unix]
   run:
 
 test:
